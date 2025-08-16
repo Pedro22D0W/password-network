@@ -1,4 +1,6 @@
 package com.passwordnetwork.password_network.Models;
+import com.passwordnetwork.password_network.DTO.PasswordDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Password {
+    public Password(PasswordDTO weakPassword, User user) {
+        this.plataform = weakPassword.plataform();
+        this.strong_password = weakPassword.password();
+        this.user = user;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
