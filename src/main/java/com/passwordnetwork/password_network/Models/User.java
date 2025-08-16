@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String password;
     
     @OneToMany(mappedBy = "user")
-    private List<Password> passwords = new ArrayList<>();
+    private List<Password> strongPasswords = new ArrayList<>();
 
 
     public User(RequestDTO userData){
