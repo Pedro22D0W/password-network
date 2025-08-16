@@ -11,6 +11,7 @@ import com.passwordnetwork.password_network.Models.Password;
 import com.passwordnetwork.password_network.Models.User;
 import com.passwordnetwork.password_network.Repository.PasswordRepository;
 import com.passwordnetwork.password_network.Repository.UserRepository;
+import com.passwordnetwork.password_network.Services.PasswordStrengthService;
 import com.passwordnetwork.password_network.infra.security.TokenService;
 
 @RestController
@@ -22,13 +23,18 @@ public class PasswordController {
     private UserRepository userRepository;
     @Autowired
     private PasswordRepository passwordRepository;
+    @Autowired
+    private PasswordStrengthService passwordStrengthService;
     @PostMapping("/create")
     public ResponseEntity createStrongPassword(@RequestBody PasswordDTO weakPassword,@RequestHeader("Authorization") String authorizationToken){
         String token = authorizationToken.replace("Bearer ", "");
         String userEmail = tokenService.ValidateToken(token);
         User user = userRepository.findByEmail(userEmail).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        Password strongPassword = new Password(weakPassword,user);
+
+        String strong_password = passwordStrengthService.strengthenPassword(weakPassword.password());
+        Password strongPassword = new Password(weakPassword.plataform(),strong_password,user);
         passwordRepository.save(strongPassword);
+        
         return ResponseEntity.ok().build();
 
     }
