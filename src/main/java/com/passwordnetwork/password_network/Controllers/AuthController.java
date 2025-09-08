@@ -3,6 +3,7 @@ package com.passwordnetwork.password_network.Controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,9 @@ import com.passwordnetwork.password_network.infra.security.TokenService;
 
 import java.util.Optional;
 @RestController
+@CrossOrigin
 @RequestMapping("/auth")
+
 @RequiredArgsConstructor
 public class AuthController {
     private final UserRepository userRepository;
@@ -32,7 +35,7 @@ public class AuthController {
         return ResponseEntity.badRequest().build();
     }
 
-
+  
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody RequestDTO body){
         Optional<User> user = this.userRepository.findByEmail(body.email());
