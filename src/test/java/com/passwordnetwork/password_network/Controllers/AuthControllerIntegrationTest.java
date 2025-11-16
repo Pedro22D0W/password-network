@@ -2,6 +2,7 @@ package com.passwordnetwork.password_network.Controllers;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.passwordnetwork.password_network.Repository.PasswordRepository;
 import com.passwordnetwork.password_network.Repository.UserRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,8 +35,12 @@ public class AuthControllerIntegrationTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PasswordRepository passwordRepository;
+
     @BeforeEach
     void setup() {
+        passwordRepository.deleteAll();
         userRepository.deleteAll();
     }
 

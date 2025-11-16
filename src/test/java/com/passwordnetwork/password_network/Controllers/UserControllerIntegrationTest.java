@@ -40,6 +40,7 @@ public class UserControllerIntegrationTest {
     @MockBean
     TokenService tokenService;
 
+  
     @BeforeEach
     void setup() {
         passwordRepository.deleteAll();
