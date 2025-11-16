@@ -72,7 +72,7 @@ public class UserControllerIntegrationTest {
                 .accept(APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$", hasSize(1)))
-            .andExpect(jsonPath("$[0].plataform").value("github"))
-            .andExpect(jsonPath("$[0].strong_password").value("SenhaF0rte!"));
+            .andExpect(jsonPath("$[0].platform").value("github"))
+            .andExpect(jsonPath("$[0].strongPassword").value("SenhaF0rte!"));
     }
 }
